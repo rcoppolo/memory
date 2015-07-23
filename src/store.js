@@ -1,14 +1,15 @@
 import Rx from "rx";
 import Actions from "./actions";
+import {Map} from "immutable";
 
-var state = {
-  count: 0
-};
+var state = Map([
+  ["count", 0]
+]);
 
 var subject = new Rx.BehaviorSubject(state);
 
 Actions.click.subscribe(function(value) {
-  state.count = state.count + 1;
+  state = state.set("count", state.get("count") + 1);
   subject.onNext(state);
 })
 

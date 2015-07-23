@@ -1,23 +1,29 @@
 import React from "react";
 import Actions from "./actions";
 import Model from "./store";
+import {Map} from "immutable";
+import shallowEqual from 'react/lib/shallowEqual';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {count: 0};
+    this.state = {data: Map({count: 0})};
   }
 
   componentDidMount() {
     Model.subscribe((state) => {
-      this.setState(state);
+      this.setState({data: state});
     });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   render() {
     return (
       <div>
-        <p>{this.state.count}</p>
+        <p>{this.state.data.get("count")}</p>
         <button onClick={this.click}>Click me!</button>
       </div>
     );
