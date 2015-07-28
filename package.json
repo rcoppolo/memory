@@ -4,7 +4,7 @@
   "description": "A self-quizzing app built w/ React and RxJS.",
   "main": "src/app.js",
   "scripts": {
-    "watch": "watchify src/app.jsx -t babelify --outfile build/bundle.js",
+    "watch": "watchify src/app.jsx -t [babelify --optional es7.decorators] --outfile build/bundle.js",
     "start": "python -m SimpleHTTPServer 8008",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,7 +21,12 @@
   "dependencies": {
     "babelify": "^6.1.3",
     "browserify": "^11.0.0",
+    "cookies-js": "^1.2.1",
+    "firebase": "^2.2.7",
     "immutable": "^3.7.4",
+    "keymirror": "^0.1.1",
+    "normalize.css": "^3.0.3",
+    "radium": "^0.13.4",
     "react": "^0.13.3",
     "rx": "^2.5.3",
     "watchify": "^3.3.0"

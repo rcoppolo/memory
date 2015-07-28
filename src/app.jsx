@@ -1,18 +1,40 @@
-import React from "react";
-import Actions from "./actions";
-import Model from "./store";
-import {Map} from "immutable";
+import React from 'react';
+import Actions from './actions';
+import QuestionStore from './question_store';
+import UserStore from './user_store';
+import Main from './components/main.jsx';
+import PAGES from './pages';
+import {Map} from 'immutable';
 import shallowEqual from 'react/lib/shallowEqual';
+import Radium from 'radium'
 
+let styles = {
+  'maxWidth': '800px',
+  'textAlign': 'left',
+  'margin': '0 auto',
+};
+
+@Radium
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {data: Map({count: 0})};
+    this.state = {
+      data: Map({
+        count: 0,
+      }),
+      user: Map({
+        currentUser: undefined,
+        currentPage: PAGES.questions
+      })
+    };
   }
 
   componentDidMount() {
-    Model.subscribe((state) => {
+    QuestionStore.subscribe((state) => {
       this.setState({data: state});
+    });
+    UserStore.subscribe((state) => {
+      this.setState({user: state});
     });
   }
 
@@ -22,9 +44,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>{this.state.data.get("count")}</p>
-        <button onClick={this.click}>Click me!</button>
+      <div style={styles}>
+        <Main error={this.state.data.get('error')}
+          currentUser={this.state.user.get('currentUser')}
+          currentPage={this.state.user.get('currentPage')} />
       </div>
     );
   }
