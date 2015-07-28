@@ -1,14 +1,8 @@
 import React from 'react';
 import Actions from '../actions';
 import shallowEqual from 'react/lib/shallowEqual';
-import Radium from 'radium'
 import PAGES from '../pages';
 
-var styles = {
-  background: 'white'
-}
-
-@Radium
 class Menu extends React.Component {
   constructor() {
     super();
@@ -34,12 +28,14 @@ class Menu extends React.Component {
     }
 
     return (
-      <ul style={styles}>
-        <li onClick={this.navigate.bind(this, PAGES.questions)}>Create questions</li>
-        <li onClick={this.navigate.bind(this, PAGES.recall)}>Test yourself</li>
-        {settings}
-        {loginOrOut}
-      </ul>
+      <div className='menu'>
+        <ul>
+          <li onClick={this.navigate.bind(this, PAGES.questions)}>Create questions</li>
+          <li onClick={this.navigate.bind(this, PAGES.recall)}>Test yourself</li>
+          {settings}
+          {loginOrOut}
+        </ul>
+      </div>
     );
   }
 

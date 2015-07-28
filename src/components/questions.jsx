@@ -25,7 +25,6 @@ class Questions extends React.Component {
   render() {
     return (
       <div style={styles.blah}>
-        <p>Pick a category at some point</p>
         <QuestionForm />
       </div>
     );

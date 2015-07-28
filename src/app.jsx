@@ -6,15 +6,7 @@ import Main from './components/main.jsx';
 import PAGES from './pages';
 import {Map} from 'immutable';
 import shallowEqual from 'react/lib/shallowEqual';
-import Radium from 'radium'
 
-let styles = {
-  'maxWidth': '800px',
-  'textAlign': 'left',
-  'margin': '0 auto',
-};
-
-@Radium
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -44,11 +36,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={styles}>
-        <Main error={this.state.data.get('error')}
-          currentUser={this.state.user.get('currentUser')}
-          currentPage={this.state.user.get('currentPage')} />
-      </div>
+      <Main error={this.state.data.get('error')}
+        currentUser={this.state.user.get('currentUser')}
+        currentPage={this.state.user.get('currentPage')} />
     );
   }
 

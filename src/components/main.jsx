@@ -1,7 +1,6 @@
 import React from 'react';
 import Actions from '../actions';
 import shallowEqual from 'react/lib/shallowEqual';
-import Radium from 'radium'
 import PAGES from '../pages'
 import Menu from './menu.jsx'
 import Questions from './questions.jsx'
@@ -9,20 +8,6 @@ import Recall from './recall.jsx'
 import Settings from './settings.jsx'
 import LoginForm from './login_form.jsx';
 
-var styles = {
-  main: {
-    background: 'white',
-  },
-  form: {
-    border: '1px solid black',
-  },
-  input: {
-    width: '100%',
-    display: 'block'
-  }
-};
-
-@Radium
 class Main extends React.Component {
   constructor() {
     super();
@@ -55,11 +40,13 @@ class Main extends React.Component {
     }
     if (this.props.error) { error = <p>{this.props.error}</p>; }
     return (
-      <div style={styles.main}>
+      <div>
         <h1>memory fish</h1>
         {error}
         <Menu currentUser={this.props.currentUser} />
-        {currentPage}
+        <div className='page'>
+          {currentPage}
+        </div>
       </div>
     );
   }

@@ -6,7 +6,7 @@ import {Map} from "immutable";
 
 var state = Map([
   ["currentUser", undefined],
-  ["currentPage", PAGES.questions],
+  ["currentPage", PAGES.register],
 ]);
 
 var subject = new Rx.BehaviorSubject(state);
@@ -46,24 +46,15 @@ Actions.logout.subscribe(function() {
 })
 
 Actions.register.subscribe(function({email: email, password: password}) {
-  Fire.createUser(email, password).subscribe(
-    x => {
-      Fire.passwordLogin(email, password).subscribe(
-        user => {
-          state = state.set("currentUser", data['uid']);
-          subject.onNext(state);
-        },
-        error => {
-          state.set("error", error);
-          subject.onNext(state);
-        }
-      );
-    },
-    error => {
-      state.set("error", error);
-      subject.onNext(state);
-    }
-  );
-})
+  Fire.createUser(email, password).map(x => {
+    return Fire.passwordLogin(email, password);
+  }).subscribe(user => {
+    state = state.set("currentUser", data['uid']);
+    subject.onNext(state);
+  }, error => {
+    state.set("error", error);
+    subject.onNext(state);
+  });
+});
 
 export default subject;

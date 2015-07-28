@@ -1,16 +1,7 @@
 import React from 'react';
 import Actions from '../actions';
 import shallowEqual from 'react/lib/shallowEqual';
-import Radium from 'radium'
 
-var styles = {
-  input: {
-    width: '100%',
-    display: 'block'
-  }
-};
-
-@Radium
 class QuestionForm extends React.Component {
   constructor() {
     super();
@@ -25,9 +16,9 @@ class QuestionForm extends React.Component {
     let error = undefined;
     if (this.props.error) { error = <p>{this.props.error}</p>; }
     return (
-      <div style={styles.blah}>
-        <textarea style={styles.input} ref='form' type='text' placeholder='Hi there?'></textarea>
-        <button style={styles.input} onClick={this.save}>Save this question</button>
+      <div className='question-form'>
+        <textarea ref='form' type='text' placeholder='Hi there?'></textarea>
+        <span className='button call' onClick={this.save}>Save this question</span>
       </div>
     );
   }

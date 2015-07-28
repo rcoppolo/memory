@@ -21,14 +21,24 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const buttonText = this.state.data.get('newUser') ? 'Create an account' : 'Login' ;
+    let confirm;
+    let buttonText;
+
+    if (this.state.data.get('newUser')) {
+      buttonText = 'Create an account';
+      confirm = <label> Confirm password <input ref='confirm' type='password'></input> </label>
+    } else {
+      buttonText = 'Log in';
+    }
+
     return (
-      <div>
+      <div className='login-form'>
         <ul>
-          <li className={this.state.data.get('newUser') ? '' : 'active'}
+          <li className={this.state.data.get('newUser') ? 'button active' : 'button'}
             onClick={this.toggleLogin.bind(this, true)}>Register</li>
-          <li className={this.state.data.get('newUser') ? 'active' : ''}
-            onClick={this.toggleLogin.bind(this, false)}>Login</li>
+          or
+          <li className={this.state.data.get('newUser') ? 'button' : 'button active'}
+            onClick={this.toggleLogin.bind(this, false)}>Log in</li>
         </ul>
         <label>
           Email
@@ -38,7 +48,14 @@ class LoginForm extends React.Component {
           Password
           <input ref='password' type='password'></input>
         </label>
-        <button onClick={this.login}>{buttonText}</button>
+        {confirm}
+        <label className='check'>
+          <input ref='remember' type='checkbox'></input>
+          Remember me
+        </label>
+        <ul>
+          <span className='call button' onClick={this.login}>{buttonText}</span>
+        </ul>
       </div>
     );
   }
@@ -55,10 +72,13 @@ class LoginForm extends React.Component {
     e.preventDefault();
     const email = React.findDOMNode(this.refs.email).value.trim();
     const password = React.findDOMNode(this.refs.password).value.trim();
+    const remember = React.findDOMNode(this.refs.remember).checked;
     if (this.state.data.get('newUser')) {
-      Actions.register.onNext({email: email, password: password});
+      const confirm = React.findDOMNode(this.refs.confirm).value.trim();
+      // raise error if password !== confirm
+      Actions.register.onNext({email: email, password: password, remember: remember});
     } else {
-      Actions.login.onNext({email: email, password: password});
+      Actions.login.onNext({email: email, password: password, remember: remember});
     }
   }
 }
