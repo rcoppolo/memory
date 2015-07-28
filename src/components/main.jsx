@@ -5,6 +5,7 @@ import PAGES from '../pages'
 import Menu from './menu.jsx'
 import Questions from './questions.jsx'
 import Recall from './recall.jsx'
+import Tooltip from './tooltip.jsx'
 import Settings from './settings.jsx'
 import LoginForm from './login_form.jsx';
 
@@ -32,7 +33,7 @@ class Main extends React.Component {
         currentPage = <Recall />
         break;
       case PAGES.questions:
-        currentPage = <Questions />
+        currentPage = <Questions currentTopic={this.props.currentTopic} />
         break;
       case PAGES.settings:
         currentPage = <Settings />
@@ -43,10 +44,11 @@ class Main extends React.Component {
       <div>
         <h1>memory fish</h1>
         {error}
-        <Menu currentUser={this.props.currentUser} />
+        <Menu currentPage={this.props.currentPage} currentUser={this.props.currentUser} />
         <div className='page'>
           {currentPage}
         </div>
+        <Tooltip />
       </div>
     );
   }

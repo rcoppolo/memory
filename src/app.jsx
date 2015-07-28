@@ -1,6 +1,6 @@
 import React from 'react';
 import Actions from './actions';
-import QuestionStore from './question_store';
+import QuestionsStore from './questions_store';
 import UserStore from './user_store';
 import Main from './components/main.jsx';
 import PAGES from './pages';
@@ -11,8 +11,11 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: Map({
-        count: 0,
+      misc: Map({
+        error: null
+      }),
+      questions: Map({
+        currentTopic: undefined,
       }),
       user: Map({
         currentUser: undefined,
@@ -22,8 +25,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    QuestionStore.subscribe((state) => {
-      this.setState({data: state});
+    QuestionsStore.subscribe((state) => {
+      this.setState({questions: state});
     });
     UserStore.subscribe((state) => {
       this.setState({user: state});
@@ -36,7 +39,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <Main error={this.state.data.get('error')}
+      <Main error={this.state.misc.get('error')}
+        currentTopic={this.state.questions.get('currentTopic')}
         currentUser={this.state.user.get('currentUser')}
         currentPage={this.state.user.get('currentPage')} />
     );

@@ -13,11 +13,15 @@ UserStore.subscribe(
 )
 
 var state = Map([
-  ["done", false],
-  ["error", null],
+  ["currentTopic", undefined],
 ]);
 
 var subject = new Rx.BehaviorSubject(state);
+
+Actions.setQuestionsTopic.subscribe(function(topic) {
+  state = state.set("currentTopic", topic);
+  subject.onNext(state);
+});
 
 Actions.saveQuestion.subscribe(function(question) {
   Fire.saveQuestion(question, currentUser).subscribe(

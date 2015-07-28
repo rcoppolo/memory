@@ -14,7 +14,7 @@ var styles = {
 class Settings extends React.Component {
   constructor() {
     super();
-    this.save = this.save.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -25,17 +25,15 @@ class Settings extends React.Component {
     return (
       <div style={styles.blah}>
         <p>Here's where you'll eventually be able to reset your password!</p>
+        <a onClick={this.logout}>Log out</a>
       </div>
     );
   }
 
-  save(e) {
-    e.preventDefault();
-    const input = React.findDOMNode(this.refs.form);
-    const question = input.value.trim();
-    // input.value = '';
-    Actions.saveQuestion.onNext(question);
+  logout() {
+    Actions.logout.onNext();
   }
+
 }
 
 export default Settings;

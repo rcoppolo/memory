@@ -8,5 +8,6 @@ export default {
   login: new Rx.Subject(),
   register: new Rx.Subject(),
   logout: new Rx.Subject(),
+  setQuestionsTopic: new Rx.Subject(),
 };
 

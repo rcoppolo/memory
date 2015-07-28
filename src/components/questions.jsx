@@ -25,7 +25,7 @@ class Questions extends React.Component {
   render() {
     return (
       <div style={styles.blah}>
-        <QuestionForm />
+        <QuestionForm currentTopic={this.props.currentTopic} />
       </div>
     );
   }

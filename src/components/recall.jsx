@@ -1,16 +1,7 @@
 import React from 'react';
 import Actions from '../actions';
 import shallowEqual from 'react/lib/shallowEqual';
-import Radium from 'radium'
 
-var styles = {
-  input: {
-    width: '100%',
-    display: 'block'
-  }
-};
-
-@Radium
 class Recall extends React.Component {
   constructor() {
     super();
@@ -23,7 +14,7 @@ class Recall extends React.Component {
 
   render() {
     return (
-      <div style={styles.blah}>
+      <div className='recall'>
         <p>Here's where we'll implement the thing!</p>
       </div>
     );
