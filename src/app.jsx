@@ -17,7 +17,7 @@ class App extends React.Component {
       questions: Map({
         currentTopic: undefined,
         selectedTopic: undefined,
-        topics: {},
+        topics: undefined,
       }),
       user: Map({
         currentUser: undefined,

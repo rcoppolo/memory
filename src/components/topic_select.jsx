@@ -1,6 +1,7 @@
 import React from 'react';
 import {Map} from 'immutable';
 import Actions from '../actions';
+import Loading from './loading.jsx';
 import shallowEqual from 'react/lib/shallowEqual';
 
 class TopicSelect extends React.Component {
@@ -33,6 +34,7 @@ class TopicSelect extends React.Component {
 
   render() {
     let select;
+    if (this.props.topics === undefined) { return <Loading />; }
     if (this.props.topics && Object.keys(this.props.topics).length > 0) {
       select = (
         <div className='radios'>

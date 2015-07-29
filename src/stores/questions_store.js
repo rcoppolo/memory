@@ -15,7 +15,7 @@ UserStore.subscribe(
 var state = Map([
   ["selectedTopic", undefined],
   ["currentTopic", undefined],
-  ["topics", {}],
+  ["topics", undefined],
 ]);
 
 var subject = new Rx.BehaviorSubject(state);
