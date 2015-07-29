@@ -26,6 +26,14 @@ Actions.clearTopic.subscribe(function() {
 });
 
 Actions.createTopic.subscribe(function(topic) {
+  let topics = state.get('topics');
+  for (var key in topics) {
+    if (topic === topics[key]) {
+      state = state.set('selectedTopic', topic);
+      subject.onNext(state);
+      return;
+    }
+  }
   Fire.createTopic(topic, currentUser).subscribe(topic => {
     state = state.set('selectedTopic', topic);
     Actions.loadTopics.onNext();
