@@ -24,7 +24,12 @@ class Settings extends React.Component {
   render() {
     return (
       <div style={styles.blah}>
-        <p>Here's where you'll eventually be able to reset your password!</p>
+        <p>Here's where you'll eventually be able to:</p>
+        <p>Change the email on your account.</p>
+        <p>Change or reset your password.</p>
+        <p>Delete topics (where do we delete)?</p>
+        <p>Reactivate the tutorial tooltips.</p>
+        <p>Delete your account :(</p>
         <a onClick={this.logout}>Log out</a>
       </div>
     );

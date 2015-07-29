@@ -1,6 +1,5 @@
 import Rx from "rx";
 import Firebase from "firebase";
-import Cookies from "cookies-js";
 
 const ref = new Firebase("https://memory-fish.firebaseio.com");
 
@@ -27,8 +26,7 @@ const Fire = {
         if (error) {
           observer.onError("Failed to auth anonymous user.");
         } else {
-          Cookies.set("u", authData["uid"])
-          observer.onNext()
+          observer.onNext(authData)
           observer.onCompleted()
         }
       });
@@ -41,7 +39,6 @@ const Fire = {
         if (error) {
           observer.onError("Failed to create user account.");
         } else {
-          Cookies.set("u", data["uid"])
           observer.onNext()
           observer.onCompleted()
         }
@@ -70,6 +67,32 @@ const Fire = {
           observer.onError("Failed to save question.");
         } else {
           observer.onNext();
+          observer.onCompleted();
+        }
+      });
+    });
+  },
+
+  loadTopics: function(uid) {
+    return Rx.Observable.create(function (observer) {
+      const topics = ref.child("topics").child(uid);
+      topics.on('value', function(snapshot) {
+        observer.onNext(snapshot.val());
+        observer.onCompleted();
+      }, function(error) {
+        observer.onError('Error loading topics');
+      });
+    });
+  },
+
+  createTopic: function(topic, uid) {
+    return Rx.Observable.create(function (observer) {
+      const topics = ref.child("topics").child(uid);
+      topics.push(topic, function(error) {
+        if (error) {
+          observer.onError("Failed to create topic.");
+        } else {
+          observer.onNext(topic);
           observer.onCompleted();
         }
       });

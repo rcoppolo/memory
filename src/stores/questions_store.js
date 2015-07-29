@@ -1,6 +1,6 @@
 import Rx from "rx";
-import Actions from "./actions";
-import Fire from "./firebase";
+import Actions from "../actions";
+import Fire from "../firebase";
 import {Map} from "immutable";
 import UserStore from './user_store';
 
@@ -13,12 +13,39 @@ UserStore.subscribe(
 )
 
 var state = Map([
+  ["selectedTopic", undefined],
   ["currentTopic", undefined],
+  ["topics", {}],
 ]);
 
 var subject = new Rx.BehaviorSubject(state);
 
-Actions.setQuestionsTopic.subscribe(function(topic) {
+Actions.clearTopic.subscribe(function() {
+  state = state.set('currentTopic', undefined);
+  subject.onNext(state);
+});
+
+Actions.createTopic.subscribe(function(topic) {
+  Fire.createTopic(topic, currentUser).subscribe(topic => {
+    state = state.set('selectedTopic', topic);
+    Actions.loadTopics.onNext();
+    subject.onNext(state);
+  });
+});
+
+Actions.loadTopics.subscribe(function() {
+  Fire.loadTopics(currentUser).subscribe(topics => {
+    state = state.set("topics", topics);
+    subject.onNext(state);
+  })
+});
+
+Actions.selectTopic.subscribe(function(topic) {
+  state = state.set("selectedTopic", topic);
+  subject.onNext(state);
+});
+
+Actions.setCurrentTopic.subscribe(function(topic) {
   state = state.set("currentTopic", topic);
   subject.onNext(state);
 });
@@ -31,7 +58,7 @@ Actions.saveQuestion.subscribe(function(question) {
     },
     error => {
       debugger
-      state.set("error", error);
+      state = state.set("error", error);
       subject.onNext(state);
     }
   );

@@ -2,16 +2,8 @@ import React from 'react';
 import Actions from '../actions';
 import shallowEqual from 'react/lib/shallowEqual';
 import QuestionForm from './question_form.jsx'
-import Radium from 'radium'
+import TopicSelect from './topic_select.jsx';
 
-var styles = {
-  input: {
-    width: '100%',
-    display: 'block'
-  }
-};
-
-@Radium
 class Questions extends React.Component {
   constructor() {
     super();
@@ -23,11 +15,13 @@ class Questions extends React.Component {
   }
 
   render() {
-    return (
-      <div style={styles.blah}>
-        <QuestionForm currentTopic={this.props.currentTopic} />
-      </div>
-    );
+    if (this.props.currentTopic) {
+      return <QuestionForm currentTopic={this.props.currentTopic} />;
+    } else {
+      return <TopicSelect topics={this.props.topics}
+         selectedTopic={this.props.selectedTopic}
+         currentTopic={this.props.currentTopic} />;
+    }
   }
 
   save(e) {

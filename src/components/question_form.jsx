@@ -8,6 +8,7 @@ class QuestionForm extends React.Component {
   constructor() {
     super();
     this.save = this.save.bind(this);
+    this.clearTopic = this.clearTopic.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -20,12 +21,16 @@ class QuestionForm extends React.Component {
     if (this.props.error) { error = <p>{this.props.error}</p>; }
     return (
       <div className='question-form'>
-        <TopicSelect />
         <textarea disabled={waitingForTopic} ref='form' type='text'
           placeholder={waitingForTopic ? 'Select a topic above...' : 'Tough questions here...'}></textarea>
         <span className='button call' onClick={this.save}>Save this question</span>
+        <a onClick={this.clearTopic}>Change topic...</a>
       </div>
     );
+  }
+
+  clearTopic() {
+    Actions.clearTopic.onNext();
   }
 
   save(e) {

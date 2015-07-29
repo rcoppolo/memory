@@ -33,13 +33,16 @@ class Main extends React.Component {
         currentPage = <Recall />
         break;
       case PAGES.questions:
-        currentPage = <Questions currentTopic={this.props.currentTopic} />
+        currentPage = <Questions topics={this.props.topics}
+          selectedTopic={this.props.selectedTopic}
+          currentTopic={this.props.currentTopic} />
         break;
       case PAGES.settings:
         currentPage = <Settings />
         break;
     }
     if (this.props.error) { error = <p>{this.props.error}</p>; }
+        // <Tooltip />
     return (
       <div>
         <h1>memory fish</h1>
@@ -48,7 +51,6 @@ class Main extends React.Component {
         <div className='page'>
           {currentPage}
         </div>
-        <Tooltip />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import Actions from './actions';
-import QuestionsStore from './questions_store';
-import UserStore from './user_store';
+import QuestionsStore from './stores/questions_store';
+import UserStore from './stores/user_store';
 import Main from './components/main.jsx';
 import PAGES from './pages';
 import {Map} from 'immutable';
@@ -16,6 +16,8 @@ class App extends React.Component {
       }),
       questions: Map({
         currentTopic: undefined,
+        selectedTopic: undefined,
+        topics: {},
       }),
       user: Map({
         currentUser: undefined,
@@ -40,6 +42,8 @@ class App extends React.Component {
   render() {
     return (
       <Main error={this.state.misc.get('error')}
+        topics={this.state.questions.get('topics')}
+        selectedTopic={this.state.questions.get('selectedTopic')}
         currentTopic={this.state.questions.get('currentTopic')}
         currentUser={this.state.user.get('currentUser')}
         currentPage={this.state.user.get('currentPage')} />
