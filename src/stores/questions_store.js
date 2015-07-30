@@ -16,6 +16,8 @@ var state = Map([
   ["selectedTopic", undefined],
   ["currentTopic", undefined],
   ["topics", undefined],
+  ["selectedRecallTopics", Map()],
+  ["currentRecallTopics", Map()],
 ]);
 
 var subject = new Rx.BehaviorSubject(state);
@@ -36,14 +38,29 @@ Actions.createTopic.subscribe(function(topic) {
   }
   Fire.createTopic(topic, currentUser).subscribe(topic => {
     state = state.set('selectedTopic', topic);
+    // possibly avoid hitting server every time? or do we need the keys?
     Actions.loadTopics.onNext();
     subject.onNext(state);
   });
 });
 
+Actions.toggleAllRecallTopics.subscribe(function(all) {
+  let topics = state.get('topics');
+  for (var key in topics) {
+    state = state.updateIn(['selectedRecallTopics', topics[key]], () => all);
+  }
+  subject.onNext(state);
+});
+
+Actions.toggleRecallTopic.subscribe(function(topic) {
+  state = state.updateIn(['selectedRecallTopics', topic], () => !state.getIn(['selectedRecallTopics', topic]))
+  subject.onNext(state);
+});
+
 Actions.loadTopics.subscribe(function() {
   Fire.loadTopics(currentUser).subscribe(topics => {
     state = state.set("topics", topics);
+    Actions.toggleAllRecallTopics.onNext(true);
     subject.onNext(state);
   })
 });
@@ -59,13 +76,12 @@ Actions.setCurrentTopic.subscribe(function(topic) {
 });
 
 Actions.saveQuestion.subscribe(function(question) {
-  Fire.saveQuestion(question, currentUser).subscribe(
+  Fire.saveQuestion(question, state.get('currentTopic'), currentUser).subscribe(
     x => {
       // probably clear the question here
       subject.onNext(state);
     },
     error => {
-      debugger
       state = state.set("error", error);
       subject.onNext(state);
     }

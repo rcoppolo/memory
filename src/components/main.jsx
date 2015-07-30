@@ -30,7 +30,8 @@ class Main extends React.Component {
         currentPage = <LoginForm newUser={false} />
         break;
       case PAGES.recall:
-        currentPage = <Recall />
+        currentPage = <Recall topics={this.props.topics}
+          selectedRecallTopics={this.props.selectedRecallTopics} />
         break;
       case PAGES.questions:
         currentPage = <Questions topics={this.props.topics}

@@ -18,6 +18,7 @@ class App extends React.Component {
         currentTopic: undefined,
         selectedTopic: undefined,
         topics: undefined,
+        selectedRecallTopics: undefined,
       }),
       user: Map({
         currentUser: undefined,
@@ -44,7 +45,9 @@ class App extends React.Component {
       <Main error={this.state.misc.get('error')}
         topics={this.state.questions.get('topics')}
         selectedTopic={this.state.questions.get('selectedTopic')}
+        selectedRecallTopics={this.state.questions.get('selectedRecallTopics')}
         currentTopic={this.state.questions.get('currentTopic')}
+        currentRecallTopics={this.state.questions.get('currentRecallTopics')}
         currentUser={this.state.user.get('currentUser')}
         currentPage={this.state.user.get('currentPage')} />
     );

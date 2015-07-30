@@ -13,5 +13,9 @@ export default {
   createTopic: new Rx.Subject(),
   loadTopics: new Rx.Subject(),
   clearTopic: new Rx.Subject(),
+  loadQuestions: new Rx.Subject(),
+  toggleRecallTopic: new Rx.Subject(),
+  toggleAllRecallTopics: new Rx.Subject(),
+  setRecallTopics: new Rx.Subject(),
 };
 

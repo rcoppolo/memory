@@ -59,9 +59,9 @@ const Fire = {
     });
   },
 
-  saveQuestion: function(question, uid) {
+  saveQuestion: function(question, topic, uid) {
     return Rx.Observable.create(function (observer) {
-      const questions = ref.child("questions").child(uid);
+      const questions = ref.child("questions").child(uid).child(topic);
       questions.push(question, function(error) {
         if (error) {
           observer.onError("Failed to save question.");

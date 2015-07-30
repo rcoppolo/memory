@@ -1,13 +1,15 @@
 import React from 'react';
 import Actions from '../actions';
 import shallowEqual from 'react/lib/shallowEqual';
-import RecallTopicsSelect from './recall_topics_select.jsx';
-import RecallQuestions from './recall_questions.jsx';
 
-class Recall extends React.Component {
+class RecallQuestions extends React.Component {
   constructor() {
     super();
     this.save = this.save.bind(this);
+  }
+
+  componentDidMount() {
+    Actions.loadQuestions.onNext(this.props.recallTopics);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -15,12 +17,9 @@ class Recall extends React.Component {
   }
 
   render() {
-    if (this.props.recallTopics) {
-      return <RecallQuestions recallTopics={this.props.recallTopics} />;
-    } else {
-      return <RecallTopicsSelect topics={this.props.topics}
-        selectedRecallTopics={this.props.selectedRecallTopics} />;
-    }
+    return (
+      <h1>hi</h1>
+    );
   }
 
   save(e) {
@@ -32,5 +31,5 @@ class Recall extends React.Component {
   }
 }
 
-export default Recall;
+export default RecallQuestions;
 
