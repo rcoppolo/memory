@@ -73,6 +73,18 @@ const Fire = {
     });
   },
 
+  loadQuestions: function(uid) {
+    return Rx.Observable.create(function (observer) {
+      const questions = ref.child("questions").child(uid);
+      questions.on('value', function(snapshot) {
+        observer.onNext(snapshot.val());
+        observer.onCompleted();
+      }, function(error) {
+        observer.onError('Error loading questions');
+      });
+    });
+  },
+
   loadTopics: function(uid) {
     return Rx.Observable.create(function (observer) {
       const topics = ref.child("topics").child(uid);
@@ -83,6 +95,32 @@ const Fire = {
         observer.onError('Error loading topics');
       });
     });
+  },
+
+  setTopicsAndQuestions: function(topics, questions, uid) {
+    let setTopics = Rx.Observable.create(function(observer) {
+      const topicsRef = ref.child("topics").child(uid);
+      topicsRef.set(topics, function(error) {
+        if (error) {
+          observer.onError("Failed to set topics.");
+        } else {
+          observer.onNext();
+          observer.onCompleted();
+        }
+      });
+    });
+    let setQuestions = Rx.Observable.create(function(observer) {
+      const questionsRef = ref.child("questions").child(uid);
+      questionsRef.set(questions, function(error) {
+        if (error) {
+          observer.onError("Failed to set questions.");
+        } else {
+          observer.onNext();
+          observer.onCompleted();
+        }
+      });
+    });
+    return Rx.Observable.zip(setTopics, setQuestions, () => true)
   },
 
   createTopic: function(topic, uid) {

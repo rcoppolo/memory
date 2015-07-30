@@ -42,28 +42,29 @@ class RecallTopicsSelect extends React.Component {
     }
     if (this.props.topics && Object.keys(this.props.topics).length > 0) {
       select = (
-        <div className='checks'>
-          <p>What topics do you want to quiz yourself on?</p>
-          {this.topicChecks()}
+        <div>
+          <div className='checks'>
+            <p>What topics do you want to quiz yourself on?</p>
+            {this.topicChecks()}
+          </div>
+          <div className='all'>
+            <label className='button'><input onChange={this.toggleAll.bind(this, !this.state.all)} checked={this.state.all} type='checkbox' />{toggleText}</label>
+            <div className='note'>
+              <a target="_blank" href='http://bjorklab.psych.ucla.edu/pubs/Birnbaum_Kornell_EBjork_RBjork_inpress.pdf'>Keeping all topics selected is more challenging, but most effective for learning.</a>
+            </div>
+          </div>
         </div>
       );
     } else {
       select = (
         <div>
-          <p>You have no existing question topics.</p>
-          <p><a onClick={this.navigate.bind(this, PAGES.questions)}>Create a topic, and some questions</a>.</p>
+          <p><a onClick={this.navigate.bind(this, PAGES.questions)}>First create a topic, and some questions.</a></p>
         </div>
       );
     }
     return (
       <div className='recall-topics-select'>
         {select}
-        <div className='all'>
-          <label className='button'><input onChange={this.toggleAll.bind(this, !this.state.all)} checked={this.state.all} type='checkbox' />{toggleText}</label>
-          <div className='note'>
-            <a target="_blank" href='http://bjorklab.psych.ucla.edu/pubs/Birnbaum_Kornell_EBjork_RBjork_inpress.pdf'>Keeping all topics selected is more challenging, but most effective for learning.</a>
-          </div>
-        </div>
         <span className='button call'
           onClick={this.setRecallTopics.bind(this, this.props.selectedTopic)}>Next</span>
       </div>

@@ -12,7 +12,7 @@ UserStore.subscribe(
   }
 )
 
-var state = Map([
+const defaults = Map([
   ["selectedTopic", undefined],
   ["currentTopic", undefined],
   ["topics", undefined],
@@ -20,7 +20,26 @@ var state = Map([
   ["currentRecallTopics", Map()],
 ]);
 
+var state = defaults;
+
 var subject = new Rx.BehaviorSubject(state);
+
+Actions.login.subscribe(function() {
+  state = state.set('currentRecallTopics', defaults.get('currentRecallTopics'));
+  state = state.set('currentTopic', defaults.get('currentTopic'));
+  subject.onNext(state);
+});
+
+Actions.register.subscribe(function() {
+  state = state.set('currentRecallTopics', defaults.get('currentRecallTopics'));
+  state = state.set('currentTopic', defaults.get('currentTopic'));
+  subject.onNext(state);
+});
+
+Actions.logout.subscribe(function() {
+  state = defaults;
+  subject.onNext(state);
+});
 
 Actions.clearTopic.subscribe(function() {
   state = state.set('currentTopic', undefined);

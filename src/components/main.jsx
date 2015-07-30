@@ -52,7 +52,8 @@ class Main extends React.Component {
       <div>
         <h1 onClick={this.navigate.bind(this, PAGES.landing)}>memory fish</h1>
         {error}
-        <Menu currentPage={this.props.currentPage} currentUser={this.props.currentUser} />
+        <Menu anonUser={this.props.anonUser}
+          currentPage={this.props.currentPage} currentUser={this.props.currentUser} />
         <div className='page'>
           {currentPage}
         </div>

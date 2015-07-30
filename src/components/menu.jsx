@@ -17,7 +17,7 @@ class Menu extends React.Component {
 
     let loginOrRegister;
     let settings;
-    if (this.props.currentUser) {
+    if (this.props.currentUser && !this.props.anonUser) {
       settings = <li className={this.props.currentPage === PAGES.settings ? 'active' : ''}
         onClick={this.navigate.bind(this, PAGES.settings)}>Settings</li>
     } else {

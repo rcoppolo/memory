@@ -10,21 +10,7 @@ import shallowEqual from 'react/lib/shallowEqual';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      misc: Map({
-        error: null
-      }),
-      questions: Map({
-        currentTopic: undefined,
-        selectedTopic: undefined,
-        topics: undefined,
-        selectedRecallTopics: undefined,
-      }),
-      user: Map({
-        currentUser: undefined,
-        currentPage: PAGES.questions
-      })
-    };
+    this.state = {user: null, questions: null};
   }
 
   componentDidMount() {
@@ -41,16 +27,20 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <Main error={this.state.misc.get('error')}
-        topics={this.state.questions.get('topics')}
-        selectedTopic={this.state.questions.get('selectedTopic')}
-        selectedRecallTopics={this.state.questions.get('selectedRecallTopics')}
-        currentTopic={this.state.questions.get('currentTopic')}
-        currentRecallTopics={this.state.questions.get('currentRecallTopics')}
-        currentUser={this.state.user.get('currentUser')}
-        currentPage={this.state.user.get('currentPage')} />
-    );
+    if (!this.state.user || !this.state.questions) {
+      return false; // maybe loading?
+    } else {
+      return (
+        <Main topics={this.state.questions.get('topics')}
+          selectedTopic={this.state.questions.get('selectedTopic')}
+          selectedRecallTopics={this.state.questions.get('selectedRecallTopics')}
+          currentTopic={this.state.questions.get('currentTopic')}
+          currentRecallTopics={this.state.questions.get('currentRecallTopics')}
+          anonUser={this.state.user.get('anonUser')}
+          currentUser={this.state.user.get('currentUser')}
+          currentPage={this.state.user.get('currentPage')} />
+      );
+    }
   }
 
   click() {
