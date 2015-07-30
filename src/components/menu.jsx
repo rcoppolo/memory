@@ -32,7 +32,7 @@ class Menu extends React.Component {
           <li className={this.props.currentPage === PAGES.questions ? 'active' : ''}
             onClick={this.navigate.bind(this, PAGES.questions)}>Create questions</li>
           <li className={this.props.currentPage === PAGES.recall ? 'active' : ''}
-            onClick={this.navigate.bind(this, PAGES.recall)}>Test yourself</li>
+            onClick={this.navigate.bind(this, PAGES.recall)}>Quiz yourself</li>
           {settings}
           {loginOrRegister}
         </ul>

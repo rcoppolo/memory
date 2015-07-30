@@ -21,10 +21,13 @@ class QuestionForm extends React.Component {
     if (this.props.error) { error = <p>{this.props.error}</p>; }
     return (
       <div className='question-form'>
-        <textarea disabled={waitingForTopic} ref='form' type='text'
-          placeholder={waitingForTopic ? 'Select a topic above...' : 'Tough questions here...'}></textarea>
-        <span className='button call' onClick={this.save}>Save this question</span>
-        <a onClick={this.clearTopic}>Change topic...</a>
+        <form onSubmit={this.save}>
+          <textarea disabled={waitingForTopic} ref='form' type='text'
+            placeholder={waitingForTopic ? 'Select a topic above...' : 'Tough questions here...'}></textarea>
+          <a onClick={this.clearTopic}>Change topic...</a>
+          <input type='submit' className='button call' value='Save this question' />
+          <span className='button' onClick={this.navigate}>Done, quiz yourself</span>
+        </form>
       </div>
     );
   }
@@ -37,7 +40,6 @@ class QuestionForm extends React.Component {
     e.preventDefault();
     const input = React.findDOMNode(this.refs.form);
     const question = input.value.trim();
-    // input.value = '';
     Actions.saveQuestion.onNext(question);
   }
 }

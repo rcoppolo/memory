@@ -50,8 +50,10 @@ class TopicSelect extends React.Component {
     return (
       <div className='topic-select'>
         {select}
-        <label><input type='text' ref='topic' placeholder='Create a new topic…'></input></label>
-        <span className='button' onClick={this.createTopic}>Create</span>
+        <form onSubmit={this.createTopic}>
+          <label><input type='text' ref='topic' placeholder='Create a new topic…'></input></label>
+          <input type='submit' className='button' value='Create' />
+        </form>
         <span className='button call'
           onClick={this.setCurrentTopic.bind(this, this.props.selectedTopic)}>Next</span>
       </div>
@@ -66,9 +68,12 @@ class TopicSelect extends React.Component {
     Actions.setCurrentTopic.onNext(topic);
   }
 
-  createTopic() {
+  createTopic(e) {
+    e.preventDefault();
     const topic = React.findDOMNode(this.refs.topic).value.trim();
-    Actions.createTopic.onNext(topic.toLowerCase());
+    if (topic !== '') {
+      Actions.createTopic.onNext(topic.toLowerCase());
+    }
   }
 
 }

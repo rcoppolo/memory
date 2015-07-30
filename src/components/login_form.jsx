@@ -40,22 +40,22 @@ class LoginForm extends React.Component {
           <li className={this.state.data.get('newUser') ? 'button' : 'button active'}
             onClick={this.toggleLogin.bind(this, false)}>Log in</li>
         </ul>
-        <label>
-          Email
-          <input ref='email' type='email'></input>
-        </label>
-        <label>
-          Password
-          <input ref='password' type='password'></input>
-        </label>
-        {confirm}
-        <label className='check'>
-          <input ref='remember' type='checkbox'></input>
-          Remember me
-        </label>
-        <ul>
-          <span className='call button' onClick={this.login}>{buttonText}</span>
-        </ul>
+        <form onSubmit={this.login}>
+          <label>
+            Email
+            <input ref='email' type='email'></input>
+          </label>
+          <label>
+            Password
+            <input ref='password' type='password'></input>
+          </label>
+          {confirm}
+          <label className='check'>
+            <input ref='remember' type='checkbox'></input>
+            Remember me
+          </label>
+          <input type='submit' className='call button' value={buttonText} />
+        </form>
       </div>
     );
   }
