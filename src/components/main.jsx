@@ -8,11 +8,12 @@ import Recall from './recall.jsx'
 import Tooltip from './tooltip.jsx'
 import Settings from './settings.jsx'
 import LoginForm from './login_form.jsx';
+import Landing from './landing.jsx';
 
 class Main extends React.Component {
   constructor() {
     super();
-    this.save = this.save.bind(this);
+    this.navigate = this.navigate.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -41,12 +42,15 @@ class Main extends React.Component {
       case PAGES.settings:
         currentPage = <Settings />
         break;
+      case PAGES.landing:
+        currentPage = <Landing />
+        break;
     }
     if (this.props.error) { error = <p>{this.props.error}</p>; }
         // <Tooltip />
     return (
       <div>
-        <h1>memory fish</h1>
+        <h1 onClick={this.navigate.bind(this, PAGES.landing)}>memory fish</h1>
         {error}
         <Menu currentPage={this.props.currentPage} currentUser={this.props.currentUser} />
         <div className='page'>
@@ -56,12 +60,8 @@ class Main extends React.Component {
     );
   }
 
-  save(e) {
-    e.preventDefault();
-    const input = React.findDOMNode(this.refs.form);
-    const question = input.value.trim();
-    // input.value = '';
-    Actions.saveQuestion.onNext(question);
+  navigate(page) {
+    Actions.navigate.onNext(page);
   }
 }
 

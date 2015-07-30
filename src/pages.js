@@ -6,5 +6,6 @@ export default keyMirror({
   login: null,
   register: null,
   settings: null,
+  landing: null,
 });
 

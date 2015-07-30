@@ -61,7 +61,7 @@ class RecallTopicsSelect extends React.Component {
         <div className='all'>
           <label className='button'><input onChange={this.toggleAll.bind(this, !this.state.all)} checked={this.state.all} type='checkbox' />{toggleText}</label>
           <div className='note'>
-            <a target="_blank" href='http://bjorklab.psych.ucla.edu/pubs/Birnbaum_Kornell_EBjork_RBjork_inpress.pdf'>Keeping all topics selected is more challenging, but most effective for learning</a>
+            <a target="_blank" href='http://bjorklab.psych.ucla.edu/pubs/Birnbaum_Kornell_EBjork_RBjork_inpress.pdf'>Keeping all topics selected is more challenging, but most effective for learning.</a>
           </div>
         </div>
         <span className='button call'
