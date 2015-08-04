@@ -24,6 +24,7 @@
     "firebase": "^2.2.7",
     "immutable": "^3.7.4",
     "keymirror": "^0.1.1",
+    "node-sass": "^3.2.0",
     "normalize.css": "^3.0.3",
     "react": "^0.13.3",
     "rx": "^2.5.3",
