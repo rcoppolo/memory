@@ -17,5 +17,6 @@ export default {
   toggleRecallTopic: new Rx.Subject(),
   toggleAllRecallTopics: new Rx.Subject(),
   setRecallTopics: new Rx.Subject(),
+  nextTooltip: new Rx.Subject(),
 };
 

@@ -37,6 +37,7 @@ class App extends React.Component {
           currentTopic={this.state.questions.get('currentTopic')}
           currentRecallTopics={this.state.questions.get('currentRecallTopics')}
           anonUser={this.state.user.get('anonUser')}
+          newUser={this.state.user.get('newUser')}
           currentUser={this.state.user.get('currentUser')}
           currentPage={this.state.user.get('currentPage')} />
       );

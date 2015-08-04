@@ -2,6 +2,7 @@ import React from 'react';
 import {Map} from 'immutable';
 import Actions from '../actions';
 import Loading from './loading.jsx';
+import Tooltip from './tooltip.jsx'
 import shallowEqual from 'react/lib/shallowEqual';
 
 class TopicSelect extends React.Component {
@@ -65,6 +66,7 @@ class TopicSelect extends React.Component {
   }
 
   setCurrentTopic(topic) {
+    Actions.nextTooltip.onNext();
     Actions.setCurrentTopic.onNext(topic);
   }
 

@@ -5,10 +5,10 @@ import PAGES from '../pages'
 import Menu from './menu.jsx'
 import Questions from './questions.jsx'
 import Recall from './recall.jsx'
-import Tooltip from './tooltip.jsx'
 import Settings from './settings.jsx'
 import LoginForm from './login_form.jsx';
 import Landing from './landing.jsx';
+import Tooltip from './tooltip.jsx';
 
 class Main extends React.Component {
   constructor() {
@@ -47,7 +47,6 @@ class Main extends React.Component {
         break;
     }
     if (this.props.error) { error = <p>{this.props.error}</p>; }
-        // <Tooltip />
     return (
       <div>
         <h1 onClick={this.navigate.bind(this, PAGES.landing)}>memory fish</h1>
@@ -57,6 +56,9 @@ class Main extends React.Component {
         <div className='page'>
           {currentPage}
         </div>
+        <Tooltip newUser={this.props.newUser} currentPage={this.props.currentPage}
+                 currentTopic={this.props.currentTopic} />
+        <a id='me' target='_blank' href='https://www.coppolo.com'>Ryan made this!</a>
       </div>
     );
   }
