@@ -5,6 +5,47 @@ const ref = new Firebase("https://memory-fish.firebaseio.com");
 
 const Fire = {
 
+  changeEmail: function(oldEmail, newEmail, password) {
+    return Rx.Observable.create(function (observer) {
+      ref.changeEmail({ oldEmail: oldEmail, newEmail: newEmail, password: password }, function(error) {
+        if (error) {
+          // handle error codes here:
+          // https://www.firebase.com/docs/web/api/firebase/changeemail.html
+          console.log('Error changing email')
+        } else {
+          observer.onNext();
+          observer.onCompleted();
+        }
+      });
+    });
+  },
+
+  changePassword: function(email, oldPassword, newPassword) {
+    return Rx.Observable.create(function (observer) {
+      ref.changePassword({email: email, oldPassword: oldPassword, newPassword: newPassword }, function(error) {
+        if (error) {
+          console.log('Error changing password')
+        } else {
+          observer.onNext();
+          observer.onCompleted();
+        }
+      });
+    });
+  },
+
+  resetPassword: function(email) {
+    return Rx.Observable.create(function (observer) {
+      ref.resetPassword({email: email}, function(error) {
+        if (error) {
+          console.log('Error resetting password')
+        } else {
+          observer.onNext();
+          observer.onCompleted();
+        }
+      });
+    });
+  },
+
   getAuth: function() {
     return Rx.Observable.create(function (observer) {
       var authData = ref.getAuth();
