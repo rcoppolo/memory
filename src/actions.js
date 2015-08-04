@@ -18,5 +18,7 @@ export default {
   toggleAllRecallTopics: new Rx.Subject(),
   setRecallTopics: new Rx.Subject(),
   nextTooltip: new Rx.Subject(),
+  updateEmail: new Rx.Subject(),
+  updatePassword: new Rx.Subject(),
 };
 

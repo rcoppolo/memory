@@ -7,7 +7,7 @@ const Fire = {
 
   changeEmail: function(oldEmail, newEmail, password) {
     return Rx.Observable.create(function (observer) {
-      ref.changeEmail({ oldEmail: oldEmail, newEmail: newEmail, password: password }, function(error) {
+      ref.changeEmail({oldEmail: oldEmail, newEmail: newEmail, password: password}, function(error) {
         if (error) {
           // handle error codes here:
           // https://www.firebase.com/docs/web/api/firebase/changeemail.html
@@ -22,7 +22,7 @@ const Fire = {
 
   changePassword: function(email, oldPassword, newPassword) {
     return Rx.Observable.create(function (observer) {
-      ref.changePassword({email: email, oldPassword: oldPassword, newPassword: newPassword }, function(error) {
+      ref.changePassword({email: email, oldPassword: oldPassword, newPassword: newPassword}, function(error) {
         if (error) {
           console.log('Error changing password')
         } else {
@@ -47,10 +47,35 @@ const Fire = {
   },
 
   getAuth: function() {
-    return Rx.Observable.create(function (observer) {
+    return Rx.Observable.create(observer => {
       var authData = ref.getAuth();
-      observer.onNext(authData);
-      observer.onCompleted();
+      if (authData && authData['provider'] !== 'anonymous') {
+        let userData = ref.child('users').child(authData['uid'])
+        userData.on('value', function(snapshot) {
+          authData['email'] = snapshot.val()['email'];
+          observer.onNext(authData);
+          observer.onCompleted();
+        }, function(error) {
+          observer.onError('Error loading questions');
+        });
+      } else {
+        observer.onNext(authData);
+        observer.onCompleted();
+      }
+    });
+  },
+
+  setUserData: function(uid, email) {
+    return Rx.Observable.create(function (observer) {
+      var userData = ref.child('users').child(uid);
+      userData.set({email: email}, function(error) {
+        if (error) {
+          observer.onError("Failed to set user data.");
+        } else {
+          observer.onNext();
+          observer.onCompleted();
+        }
+      });
     });
   },
 

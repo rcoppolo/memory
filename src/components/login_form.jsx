@@ -31,6 +31,11 @@ class LoginForm extends React.Component {
       buttonText = 'Log in';
     }
 
+    let remember = <label className='check'>
+                     <input ref='remember' type='checkbox'></input>
+                     Remember me
+                   </label>;
+
     return (
       <div className='login-form'>
         <ul>
@@ -50,10 +55,6 @@ class LoginForm extends React.Component {
             <input ref='password' type='password'></input>
           </label>
           {confirm}
-          <label className='check'>
-            <input ref='remember' type='checkbox'></input>
-            Remember me
-          </label>
           <input type='submit' className='call button' value={buttonText} />
         </form>
       </div>
@@ -72,7 +73,8 @@ class LoginForm extends React.Component {
     e.preventDefault();
     const email = React.findDOMNode(this.refs.email).value.trim();
     const password = React.findDOMNode(this.refs.password).value.trim();
-    const remember = React.findDOMNode(this.refs.remember).checked;
+    const remember = undefined;
+    // const remember = React.findDOMNode(this.refs.remember).checked;
     if (this.state.data.get('newUser')) {
       const confirm = React.findDOMNode(this.refs.confirm).value.trim();
       // raise error if password !== confirm

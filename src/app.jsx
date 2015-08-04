@@ -39,6 +39,7 @@ class App extends React.Component {
           anonUser={this.state.user.get('anonUser')}
           newUser={this.state.user.get('newUser')}
           currentUser={this.state.user.get('currentUser')}
+          currentUserEmail={this.state.user.get('currentUserEmail')}
           currentPage={this.state.user.get('currentPage')} />
       );
     }

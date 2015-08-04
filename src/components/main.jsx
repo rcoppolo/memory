@@ -40,7 +40,7 @@ class Main extends React.Component {
           currentTopic={this.props.currentTopic} />
         break;
       case PAGES.settings:
-        currentPage = <Settings />
+        currentPage = <Settings currentUserEmail={this.props.currentUserEmail} />
         break;
       case PAGES.landing:
         currentPage = <Landing />
