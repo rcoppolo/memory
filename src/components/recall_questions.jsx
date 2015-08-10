@@ -12,10 +12,6 @@ class RecallQuestions extends React.Component {
     this.navigate = this.navigate.bind(this);
   }
 
-  componentDidMount() {
-    Actions.loadQuestions.onNext(this.props.currentRecallTopics);
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
@@ -23,8 +19,14 @@ class RecallQuestions extends React.Component {
   render() {
     let question = this.props.questions.get(this.props.currentQuestionIndex);
     if (this.props.currentQuestionIndex >= this.props.questions.size) {
-      return <div className='question'>
-        No more questions. <a onClick={this.navigate.bind(this, PAGES.questions)}> Create some new ones...</a></div>
+      return (
+        <div className='question'>
+          <p>You've answered all your questions.</p>
+          <p>
+            <a onClick={this.navigate.bind(this, PAGES.questions)}>Create some new questions</a> or <a onClick={this.clearTopics}>change topics...</a>
+          </p>
+        </div>
+      );
     } else if (question === undefined) {
       return false;
     }

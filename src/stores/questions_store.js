@@ -136,9 +136,11 @@ Actions.setCurrentTopic.subscribe(function(topic) {
   subject.onNext(state);
 });
 
-Actions.setRecallTopics.subscribe(function(topic) {
-  state = state.set('currentRecallTopics', state.get('selectedRecallTopics'));
+Actions.setRecallTopics.subscribe(function() {
+  let topics = state.get('selectedRecallTopics');
+  state = state.set('currentRecallTopics', topics);
   subject.onNext(state);
+  Actions.loadQuestions.onNext(topics);
 });
 
 Actions.saveQuestion.subscribe(function(questionText) {
