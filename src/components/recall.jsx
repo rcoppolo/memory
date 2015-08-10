@@ -15,10 +15,13 @@ class Recall extends React.Component {
   }
 
   render() {
-    if (this.props.recallTopics) {
-      return <RecallQuestions recallTopics={this.props.recallTopics} />;
+    if (this.props.currentRecallTopics.size > 0) {
+      return <RecallQuestions questions={this.props.questions}
+        currentQuestionIndex={this.props.currentQuestionIndex}
+        currentRecallTopics={this.props.currentRecallTopics} />;
     } else {
       return <RecallTopicsSelect topics={this.props.topics}
+        currentRecallTopics={this.props.currentRecallTopics}
         selectedRecallTopics={this.props.selectedRecallTopics} />;
     }
   }

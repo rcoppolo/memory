@@ -124,7 +124,7 @@ Actions.logout.subscribe(function() {
 
 Actions.register.subscribe(function({email: email, password: password}) {
   let anonUser = state.get('currentUser');
-  Rx.Observable.zip(Fire.loadTopics(anonUser), Fire.loadQuestions(anonUser), (topics, questions) => {
+  Rx.Observable.zip(Fire.loadTopics(anonUser), Fire.loadAllQuestions(anonUser), (topics, questions) => {
     return {topics: topics, questions: questions};
   }).subscribe(({topics: topics, questions: questions}) => {
     Fire.createUser(email, password).concat(Fire.passwordLogin(email, password)).last().subscribe(user => {

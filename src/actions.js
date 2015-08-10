@@ -13,6 +13,7 @@ export default {
   createTopic: new Rx.Subject(),
   loadTopics: new Rx.Subject(),
   clearTopic: new Rx.Subject(),
+  clearTopics: new Rx.Subject(),
   loadQuestions: new Rx.Subject(),
   toggleRecallTopic: new Rx.Subject(),
   toggleAllRecallTopics: new Rx.Subject(),
@@ -20,5 +21,7 @@ export default {
   nextTooltip: new Rx.Subject(),
   updateEmail: new Rx.Subject(),
   updatePassword: new Rx.Subject(),
+  correctQuestion: new Rx.Subject(),
+  freshQuestion: new Rx.Subject(),
 };
 

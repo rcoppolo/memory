@@ -32,6 +32,9 @@ class Main extends React.Component {
         break;
       case PAGES.recall:
         currentPage = <Recall topics={this.props.topics}
+          questions={this.props.questions}
+          currentQuestionIndex={this.props.currentQuestionIndex}
+          currentRecallTopics={this.props.currentRecallTopics}
           selectedRecallTopics={this.props.selectedRecallTopics} />
         break;
       case PAGES.questions:

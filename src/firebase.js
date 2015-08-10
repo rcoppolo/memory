@@ -125,6 +125,20 @@ const Fire = {
     });
   },
 
+  updateQuestion: function(id, question, topic, uid) {
+    return Rx.Observable.create(function (observer) {
+      const questions = ref.child("questions").child(uid).child(topic).child(id);
+      questions.set(question, function(error) {
+        if (error) {
+          observer.onError("Failed to save question.");
+        } else {
+          observer.onNext();
+          observer.onCompleted();
+        }
+      });
+    });
+  },
+
   saveQuestion: function(question, topic, uid) {
     return Rx.Observable.create(function (observer) {
       const questions = ref.child("questions").child(uid).child(topic);
@@ -139,11 +153,25 @@ const Fire = {
     });
   },
 
-  loadQuestions: function(uid) {
+  loadAllQuestions: function(uid) {
     return Rx.Observable.create(function (observer) {
       const questions = ref.child("questions").child(uid);
       questions.on('value', function(snapshot) {
         observer.onNext(snapshot.val());
+        observer.onCompleted();
+      }, function(error) {
+        observer.onError('Error loading questions');
+      });
+    });
+  },
+
+  loadQuestions: function(uid, topic) {
+    return Rx.Observable.create(function (observer) {
+      const questions = ref.child("questions").child(uid).child(topic);
+      questions.orderByChild('askCount').on('value', function(snapshot) {
+        if (snapshot.val()) {
+          observer.onNext(snapshot.val());
+        }
         observer.onCompleted();
       }, function(error) {
         observer.onError('Error loading questions');

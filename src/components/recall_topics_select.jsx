@@ -85,12 +85,8 @@ class RecallTopicsSelect extends React.Component {
     Actions.toggleAllRecallTopics.onNext(all);
   }
 
-  setRecallTopics(e) {
-    e.preventDefault();
-    const input = React.findDOMNode(this.refs.form);
-    const question = input.value.trim();
-    // input.value = '';
-    Actions.saveQuestion.onNext(question);
+  setRecallTopics() {
+    Actions.setRecallTopics.onNext();
   }
 }
 

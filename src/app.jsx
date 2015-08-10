@@ -32,6 +32,8 @@ class App extends React.Component {
     } else {
       return (
         <Main topics={this.state.questions.get('topics')}
+          questions={this.state.questions.get('questions')}
+          currentQuestionIndex={this.state.questions.get('currentQuestionIndex')}
           selectedTopic={this.state.questions.get('selectedTopic')}
           selectedRecallTopics={this.state.questions.get('selectedRecallTopics')}
           currentTopic={this.state.questions.get('currentTopic')}
