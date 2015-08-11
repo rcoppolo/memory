@@ -5,6 +5,7 @@ import {PAGES} from '../constants'
 import Menu from './menu.jsx'
 import Questions from './questions.jsx'
 import Recall from './recall.jsx'
+import Flash from './flash.jsx'
 import Settings from './settings.jsx'
 import LoginForm from './login_form.jsx';
 import Landing from './landing.jsx';
@@ -56,8 +57,11 @@ class Main extends React.Component {
       <div>
         <h1 onClick={this.navigate.bind(this, PAGES.landing)}>memory fish</h1>
         {error}
-        <Menu anonUser={this.props.anonUser}
-          currentPage={this.props.currentPage} currentUser={this.props.currentUser} />
+        <div className='left'>
+          <Menu anonUser={this.props.anonUser}
+            currentPage={this.props.currentPage} currentUser={this.props.currentUser} />
+          <Flash flash={this.props.flash} />
+        </div>
         <div className='page'>
           {currentPage}
         </div>

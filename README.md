@@ -5,8 +5,7 @@ npm start
 ```
 
 ### Todo
-* Clear form values on submit
-* Flash messages for success & errors
+* Flash messages errors
 * Component class to share navigate and pure mix in stuff
 * Organize CSS
 * Validate clicking 'Next' in TopicSelect when no topic is selected

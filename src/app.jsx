@@ -2,6 +2,7 @@ import React from 'react';
 import Actions from './actions';
 import QuestionsStore from './stores/questions_store';
 import UserStore from './stores/user_store';
+import FlashStore from './stores/flash_store';
 import Main from './components/main.jsx';
 import {PAGES, TUTORIAL} from './constants';
 import {Map} from 'immutable';
@@ -20,6 +21,9 @@ class App extends React.Component {
     UserStore.subscribe((state) => {
       this.setState({user: state});
     });
+    FlashStore.subscribe((state) => {
+      this.setState({flash: state});
+    });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -32,6 +36,8 @@ class App extends React.Component {
     } else {
       return (
         <Main topics={this.state.questions.get('topics')}
+          flash={this.state.flash}
+          tutorialState={this.state.user.get('tutorialState')}
           questions={this.state.questions.get('questions')}
           currentQuestionIndex={this.state.questions.get('currentQuestionIndex')}
           selectedTopic={this.state.questions.get('selectedTopic')}

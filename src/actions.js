@@ -23,5 +23,7 @@ export default {
   updatePassword: new Rx.Subject(),
   correctQuestion: new Rx.Subject(),
   freshQuestion: new Rx.Subject(),
+  closeFlash: new Rx.Subject(),
+  updateFlash: new Rx.Subject(),
 };
 

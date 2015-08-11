@@ -80,19 +80,28 @@ class Settings extends React.Component {
 
   update(e) {
     e.preventDefault();
-    const email = React.findDOMNode(this.refs.email).value.trim();
-    const password = React.findDOMNode(this.refs.password).value.trim();
+    const email = React.findDOMNode(this.refs.email);
+    const password = React.findDOMNode(this.refs.password);
     if (this.state.data.get('changeEmail')) {
-      const newEmail = React.findDOMNode(this.refs.newEmail).value.trim();
-      Actions.updateEmail.onNext({email: email, newEmail: newEmail, password: password});
+      const newEmail = React.findDOMNode(this.refs.newEmail);
+      Actions.updateEmail.onNext({email: email.value.trim(), newEmail: newEmail.value.trim(), password: password.value.trim()});
+      password.value = '';
+      newEmail.value = '';
     } else {
-      const newPassword = React.findDOMNode(this.refs.newPassword).value.trim();
-      Actions.updatePassword.onNext({email: email, password: password, newPassword: newPassword});
+      const newPassword = React.findDOMNode(this.refs.newPassword);
+      Actions.updatePassword.onNext({email: email.value.trim(), newPassword: newPassword.value.trim(), password: password.value.trim()});
+      password.value = '';
+      newPassword.value = '';
     }
   }
 
   toggleChange(changeEmail) {
     if (changeEmail !== this.state.data.get("changeEmail")) {
+      React.findDOMNode(this.refs.password).value = '';
+      const newPassword = React.findDOMNode(this.refs.newPassword);
+      const newEmail = React.findDOMNode(this.refs.newEmail);
+      if (newPassword) { newPassword.value = ''; }
+      if (newEmail) { newEmail.value = ''; }
       this.setState(({data}) => ({
         data: data.update('changeEmail', _x => changeEmail)
       }));

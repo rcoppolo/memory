@@ -60,6 +60,7 @@ Actions.updateEmail.subscribe(function({email: email, newEmail: newEmail, passwo
                        Fire.setUserData(state.get('currentUser'), newEmail)).subscribe(
     _x => {
       state = state.set('currentUserEmail', newEmail);
+      Actions.updateFlash.onNext({message: 'Email changed!', lasts: 1});
       subject.onNext(state);
     },
     error => {
@@ -72,6 +73,7 @@ Actions.updateEmail.subscribe(function({email: email, newEmail: newEmail, passwo
 Actions.updatePassword.subscribe(function({email: email, password: password, newPassword: newPassword}) {
   Fire.changePassword(email, password, newPassword).subscribe(
     _x => {
+      Actions.updateFlash.onNext({message: 'Password changed!', lasts: 1});
       subject.onNext(state);
     },
     error => {

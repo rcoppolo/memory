@@ -147,7 +147,7 @@ Actions.saveQuestion.subscribe(function(questionText) {
   let question = {question: questionText, askCount: 0, topic: state.get('currentTopic')};
   Fire.saveQuestion(question, state.get('currentTopic'), currentUser).subscribe(
     x => {
-      // probably clear the question here
+      Actions.updateFlash.onNext({message: 'Question created!', lasts: 1});
       subject.onNext(state);
     },
     error => {

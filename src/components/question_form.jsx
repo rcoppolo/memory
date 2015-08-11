@@ -11,6 +11,7 @@ class QuestionForm extends React.Component {
     this.save = this.save.bind(this);
     this.clearTopic = this.clearTopic.bind(this);
     this.navigate = this.navigate.bind(this);
+    this.checkForEnter = this.checkForEnter.bind(this);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -24,7 +25,7 @@ class QuestionForm extends React.Component {
     return (
       <div className='question-form'>
         <form onSubmit={this.save}>
-          <textarea disabled={waitingForTopic} ref='form' type='text'
+          <textarea onKeyDown={this.checkForEnter} disabled={waitingForTopic} ref='form' type='text'
             placeholder={waitingForTopic ? 'Select a topic above...' : 'Tough questions here...'}></textarea>
           <a onClick={this.clearTopic}>Change topic...</a>
           <input type='submit' className='button call' value='Save this question' />
@@ -36,6 +37,12 @@ class QuestionForm extends React.Component {
 
   clearTopic() {
     Actions.clearTopic.onNext();
+  }
+
+  checkForEnter(e) {
+    if (e.key === 'Enter') {
+      this.save(e);
+    }
   }
 
   navigate(page) {
