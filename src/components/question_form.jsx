@@ -46,6 +46,8 @@ class QuestionForm extends React.Component {
     e.preventDefault();
     const input = React.findDOMNode(this.refs.form);
     const question = input.value.trim();
+    input.value = '';
+    input.focus();
     Actions.saveQuestion.onNext(question);
     if (this.props.tutorialState === TUTORIAL.creating_first_question) {
       Actions.nextTooltip.onNext();

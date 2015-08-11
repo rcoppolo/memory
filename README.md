@@ -5,7 +5,6 @@ npm start
 ```
 
 ### Todo
-* Start on fetching questions for the test!!!
 * Clear form values on submit
 * Flash messages for success & errors
 * Component class to share navigate and pure mix in stuff

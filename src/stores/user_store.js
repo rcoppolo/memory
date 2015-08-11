@@ -8,7 +8,6 @@ var state = Map([
   ['anonUser', undefined],
   ['tutorialState', TUTORIAL.creating_first_topic],
   ['currentUser', undefined],
-  ['currentUser', undefined],
   ['currentUserEmail', undefined],
   ['currentPage', PAGES.landing],
 ]);
@@ -25,7 +24,7 @@ var getDefaultPage = function() {
       page = PAGES.questions;
       break;
     case TUTORIAL.done:
-      page = PAGES.recall;
+      page = PAGES.landing;
       break;
   }
   return page;
@@ -40,7 +39,12 @@ var getAuth = function() {
         subject.onNext(state);
       });
     } else {
-      state = state.set('anonUser', user['provider'] === 'anonymous');
+      if (user['provider'] !== 'anonymous') {
+        state = state.set('anonUser', false);
+        state = state.set('tutorialState', TUTORIAL.done);
+      } else {
+        state = state.set('anonUser', true);
+      }
       state = state.set('currentUser', user ? user['uid'] : undefined);
       state = state.set('currentPage', getDefaultPage());
       state = state.set('currentUserEmail', user['email']);
