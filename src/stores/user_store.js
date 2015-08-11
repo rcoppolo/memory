@@ -1,12 +1,12 @@
 import Rx from "rx";
 import Actions from "../actions";
 import Fire from "../firebase";
-import PAGES from '../pages';
+import {PAGES, TUTORIAL} from '../constants';
 import {Map} from "immutable";
 
 var state = Map([
   ['anonUser', undefined],
-  ['newUser', 1],
+  ['tutorialState', TUTORIAL.creating_first_topic],
   ['currentUser', undefined],
   ['currentUser', undefined],
   ['currentUserEmail', undefined],
@@ -17,17 +17,14 @@ var subject = new Rx.BehaviorSubject(state);
 
 var getDefaultPage = function() {
   let page;
-  switch (state.get('newUser')) {
-    case 1: // brand new user
+  switch (state.get('tutorialState')) {
+    case TUTORIAL.creating_first_topic:
       page = PAGES.landing;
       break;
-    case 2: // user has clicked "Get started"
+    case TUTORIAL.creating_first_question:
       page = PAGES.questions;
       break;
-    // case 3: // user has created a topic and question
-    //   page = PAGES.recall;
-    //   break;
-    case false: // user has completed the tutorial
+    case TUTORIAL.done:
       page = PAGES.recall;
       break;
   }
@@ -81,15 +78,24 @@ Actions.updatePassword.subscribe(function({email: email, password: password, new
 });
 
 Actions.nextTooltip.subscribe(function() {
-  let newUser = state.get('newUser');
-  if (newUser) {
-    if (newUser === 3) {
-      state = state.set('newUser', false);
-    } else {
-      state = state.set('newUser', newUser + 1);
-    }
-    subject.onNext(state);
+  switch (state.get('tutorialState')) {
+    case TUTORIAL.brand_new_user:
+      state = state.set('tutorialState', TUTORIAL.creating_first_topic);
+      break;
+    case TUTORIAL.creating_first_topic:
+      state = state.set('tutorialState', TUTORIAL.creating_first_question);
+      break;
+    case TUTORIAL.creating_first_question:
+      state = state.set('tutorialState', TUTORIAL.quizzing_first_time);
+      break;
+    case TUTORIAL.quizzing_first_time:
+      state = state.set('tutorialState', TUTORIAL.ready_to_register);
+      break;
+    case TUTORIAL.ready_to_register:
+      state = state.set('tutorialState', TUTORIAL.done);
+      break;
   }
+  subject.onNext(state);
 });
 
 Actions.login.subscribe(function({email: email, password: password}) {

@@ -16,10 +16,11 @@ class Questions extends React.Component {
 
   render() {
     if (this.props.currentTopic) {
-      return <QuestionForm currentTopic={this.props.currentTopic} />;
+      return <QuestionForm tutorialState={this.props.tutorialState} currentTopic={this.props.currentTopic} />;
     } else {
       return <TopicSelect topics={this.props.topics}
          selectedTopic={this.props.selectedTopic}
+         tutorialState={this.props.tutorialState}
          currentTopic={this.props.currentTopic} />;
     }
   }

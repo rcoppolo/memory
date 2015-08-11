@@ -1,7 +1,7 @@
 import React from 'react';
 import Actions from '../actions';
 import shallowEqual from 'react/lib/shallowEqual';
-import PAGES from '../pages'
+import {PAGES} from '../constants'
 import Menu from './menu.jsx'
 import Questions from './questions.jsx'
 import Recall from './recall.jsx'
@@ -33,12 +33,14 @@ class Main extends React.Component {
       case PAGES.recall:
         currentPage = <Recall topics={this.props.topics}
           questions={this.props.questions}
+          tutorialState={this.props.tutorialState}
           currentQuestionIndex={this.props.currentQuestionIndex}
           currentRecallTopics={this.props.currentRecallTopics}
           selectedRecallTopics={this.props.selectedRecallTopics} />
         break;
       case PAGES.questions:
         currentPage = <Questions topics={this.props.topics}
+          tutorialState={this.props.tutorialState}
           selectedTopic={this.props.selectedTopic}
           currentTopic={this.props.currentTopic} />
         break;
@@ -59,7 +61,8 @@ class Main extends React.Component {
         <div className='page'>
           {currentPage}
         </div>
-        <Tooltip newUser={this.props.newUser} currentPage={this.props.currentPage}
+        <Tooltip tutorialState={this.props.tutorialState} currentPage={this.props.currentPage}
+                 currentRecallTopics={this.props.currentRecallTopics}
                  currentTopic={this.props.currentTopic} />
         <a id='me' target='_blank' href='https://www.coppolo.com'>Ryan made this!</a>
       </div>

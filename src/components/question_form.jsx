@@ -3,7 +3,7 @@ import {Map} from 'immutable';
 import Actions from '../actions';
 import TopicSelect from './topic_select.jsx';
 import shallowEqual from 'react/lib/shallowEqual';
-import PAGES from '../pages';
+import {PAGES, TUTORIAL} from '../constants';
 
 class QuestionForm extends React.Component {
   constructor() {
@@ -47,6 +47,9 @@ class QuestionForm extends React.Component {
     const input = React.findDOMNode(this.refs.form);
     const question = input.value.trim();
     Actions.saveQuestion.onNext(question);
+    if (this.props.tutorialState === TUTORIAL.creating_first_question) {
+      Actions.nextTooltip.onNext();
+    }
   }
 }
 

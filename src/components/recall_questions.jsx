@@ -1,12 +1,11 @@
 import React from 'react';
 import Actions from '../actions';
 import shallowEqual from 'react/lib/shallowEqual';
-import PAGES from '../pages';
+import {PAGES, TUTORIAL} from '../constants';
 
 class RecallQuestions extends React.Component {
   constructor() {
     super();
-    this.save = this.save.bind(this);
     this.clearTopics = this.clearTopics.bind(this);
     this.requeue = this.requeue.bind(this);
     this.navigate = this.navigate.bind(this);
@@ -36,21 +35,13 @@ class RecallQuestions extends React.Component {
         <p>{this.props.currentQuestionIndex} of {this.props.questions.size} completed</p>
         <a onClick={this.clearTopics}>Change topics...</a>
         <span className='button call' onClick={this.done.bind(this, question)} >I know this!</span>
-        <span className='button' onClick={this.requeue}>I need to see this question again</span>
+        <span className='button' onClick={this.requeue}>I'm not sure</span>
       </div>
     );
   }
 
   navigate(page) {
     Actions.navigate.onNext(page);
-  }
-
-  save(e) {
-    e.preventDefault();
-    const input = React.findDOMNode(this.refs.form);
-    const question = input.value.trim();
-    // input.value = '';
-    Actions.saveQuestion.onNext(question);
   }
 
   clearTopics() {
@@ -60,10 +51,16 @@ class RecallQuestions extends React.Component {
   done(question) {
     Actions.correctQuestion.onNext(question);
     Actions.freshQuestion.onNext();
+    if (this.props.tutorialState === TUTORIAL.quizzing_first_time) {
+      Actions.nextTooltip.onNext();
+    }
   }
 
   requeue() {
     Actions.freshQuestion.onNext();
+    if (this.props.tutorialState === TUTORIAL.quizzing_first_time) {
+      Actions.nextTooltip.onNext();
+    }
   }
 }
 

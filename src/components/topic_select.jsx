@@ -4,6 +4,7 @@ import Actions from '../actions';
 import Loading from './loading.jsx';
 import Tooltip from './tooltip.jsx'
 import shallowEqual from 'react/lib/shallowEqual';
+import {TUTORIAL} from '../constants';
 
 class TopicSelect extends React.Component {
   constructor() {
@@ -66,13 +67,17 @@ class TopicSelect extends React.Component {
   }
 
   setCurrentTopic(topic) {
-    Actions.nextTooltip.onNext();
+    if (this.props.tutorialState === TUTORIAL.creating_first_topic) {
+      Actions.nextTooltip.onNext();
+    }
     Actions.setCurrentTopic.onNext(topic);
   }
 
   createTopic(e) {
     e.preventDefault();
-    const topic = React.findDOMNode(this.refs.topic).value.trim();
+    const topicInput = React.findDOMNode(this.refs.topic);
+    const topic = topicInput.value.trim();
+    topicInput.value = '';
     if (topic !== '') {
       Actions.createTopic.onNext(topic.toLowerCase());
     }

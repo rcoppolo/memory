@@ -2,7 +2,7 @@ import React from 'react';
 import Actions from '../actions';
 import shallowEqual from 'react/lib/shallowEqual';
 import Loading from './loading.jsx';
-import PAGES from '../pages';
+import {PAGES} from '../constants';
 
 class RecallTopicsSelect extends React.Component {
   constructor() {

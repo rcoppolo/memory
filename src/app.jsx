@@ -3,7 +3,7 @@ import Actions from './actions';
 import QuestionsStore from './stores/questions_store';
 import UserStore from './stores/user_store';
 import Main from './components/main.jsx';
-import PAGES from './pages';
+import {PAGES, TUTORIAL} from './constants';
 import {Map} from 'immutable';
 import shallowEqual from 'react/lib/shallowEqual';
 
@@ -39,7 +39,7 @@ class App extends React.Component {
           currentTopic={this.state.questions.get('currentTopic')}
           currentRecallTopics={this.state.questions.get('currentRecallTopics')}
           anonUser={this.state.user.get('anonUser')}
-          newUser={this.state.user.get('newUser')}
+          tutorialState={this.state.user.get('tutorialState')}
           currentUser={this.state.user.get('currentUser')}
           currentUserEmail={this.state.user.get('currentUserEmail')}
           currentPage={this.state.user.get('currentPage')} />

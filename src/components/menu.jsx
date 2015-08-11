@@ -1,7 +1,7 @@
 import React from 'react';
 import Actions from '../actions';
 import shallowEqual from 'react/lib/shallowEqual';
-import PAGES from '../pages';
+import {PAGES} from '../constants';
 
 class Menu extends React.Component {
   constructor() {
