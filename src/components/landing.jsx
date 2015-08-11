@@ -16,7 +16,7 @@ class Landing extends React.Component {
   render() {
     return (
       <div className='landing'>
-        <h2>Remember more. Learn faster.</h2>
+        <h2>Remember more stuff!</h2>
         <div className='text'>
           <p>Memory Fish is a simple flashcard app that encourages<br />memory-sharpening learning behaviors,* such as:</p>
           <ul>
