@@ -41,7 +41,6 @@ class App extends Base {
           currentTopic={this.state.questions.get('currentTopic')}
           currentRecallTopics={this.state.questions.get('currentRecallTopics')}
           anonUser={this.state.user.get('anonUser')}
-          tutorialState={this.state.user.get('tutorialState')}
           currentUser={this.state.user.get('currentUser')}
           currentUserEmail={this.state.user.get('currentUserEmail')}
           currentPage={this.state.user.get('currentPage')} />
