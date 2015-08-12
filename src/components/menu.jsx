@@ -1,16 +1,11 @@
 import React from 'react';
+import Base from './base.jsx';
 import Actions from '../actions';
-import shallowEqual from 'react/lib/shallowEqual';
 import {PAGES} from '../constants';
 
-class Menu extends React.Component {
+class Menu extends Base {
   constructor() {
     super();
-    this.navigate = this.navigate.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   render() {
@@ -38,10 +33,6 @@ class Menu extends React.Component {
         </ul>
       </div>
     );
-  }
-
-  navigate(page) {
-    Actions.navigate.onNext(page);
   }
 
 }

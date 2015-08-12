@@ -1,21 +1,16 @@
 import React from 'react';
+import Base from './base.jsx';
 import {Map} from 'immutable';
 import Actions from '../actions';
 import TopicSelect from './topic_select.jsx';
-import shallowEqual from 'react/lib/shallowEqual';
 import {PAGES, TUTORIAL} from '../constants';
 
-class QuestionForm extends React.Component {
+class QuestionForm extends Base {
   constructor() {
     super();
     this.save = this.save.bind(this);
     this.clearTopic = this.clearTopic.bind(this);
-    this.navigate = this.navigate.bind(this);
     this.checkForEnter = this.checkForEnter.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   render() {
@@ -43,10 +38,6 @@ class QuestionForm extends React.Component {
     if (e.key === 'Enter') {
       this.save(e);
     }
-  }
-
-  navigate(page) {
-    Actions.navigate.onNext(page);
   }
 
   save(e) {

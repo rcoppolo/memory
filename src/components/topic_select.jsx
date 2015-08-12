@@ -1,12 +1,12 @@
 import React from 'react';
+import Base from './base.jsx';
 import {Map} from 'immutable';
 import Actions from '../actions';
 import Loading from './loading.jsx';
 import Tooltip from './tooltip.jsx'
-import shallowEqual from 'react/lib/shallowEqual';
 import {TUTORIAL} from '../constants';
 
-class TopicSelect extends React.Component {
+class TopicSelect extends Base {
   constructor() {
     super();
     this.selectTopic = this.selectTopic.bind(this);
@@ -17,10 +17,6 @@ class TopicSelect extends React.Component {
 
   componentDidMount() {
     Actions.loadTopics.onNext();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   topicRadios() {

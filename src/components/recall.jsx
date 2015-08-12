@@ -1,17 +1,13 @@
 import React from 'react';
+import Base from './base.jsx';
 import Actions from '../actions';
-import shallowEqual from 'react/lib/shallowEqual';
 import RecallTopicsSelect from './recall_topics_select.jsx';
 import RecallQuestions from './recall_questions.jsx';
 
-class Recall extends React.Component {
+class Recall extends Base {
   constructor() {
     super();
     this.save = this.save.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   render() {

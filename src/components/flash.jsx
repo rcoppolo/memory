@@ -1,15 +1,11 @@
 import React from 'react';
+import Base from './base.jsx';
 import Actions from '../actions';
-import shallowEqual from 'react/lib/shallowEqual';
 
-class Flash extends React.Component {
+class Flash extends Base {
   constructor() {
     super();
     this.closeFlash = this.closeFlash.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   render() {

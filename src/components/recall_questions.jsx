@@ -1,18 +1,13 @@
 import React from 'react';
+import Base from './base.jsx';
 import Actions from '../actions';
-import shallowEqual from 'react/lib/shallowEqual';
 import {PAGES, TUTORIAL} from '../constants';
 
-class RecallQuestions extends React.Component {
+class RecallQuestions extends Base {
   constructor() {
     super();
     this.clearTopics = this.clearTopics.bind(this);
     this.requeue = this.requeue.bind(this);
-    this.navigate = this.navigate.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   render() {
@@ -38,10 +33,6 @@ class RecallQuestions extends React.Component {
         <span className='button' onClick={this.requeue}>I'm not sure</span>
       </div>
     );
-  }
-
-  navigate(page) {
-    Actions.navigate.onNext(page);
   }
 
   clearTopics() {

@@ -1,4 +1,5 @@
 import React from 'react';
+import Base from './components/base.jsx';
 import Actions from './actions';
 import QuestionsStore from './stores/questions_store';
 import UserStore from './stores/user_store';
@@ -6,9 +7,8 @@ import FlashStore from './stores/flash_store';
 import Main from './components/main.jsx';
 import {PAGES, TUTORIAL} from './constants';
 import {Map} from 'immutable';
-import shallowEqual from 'react/lib/shallowEqual';
 
-class App extends React.Component {
+class App extends Base {
   constructor(props) {
     super(props);
     this.state = {user: null, questions: null};
@@ -24,10 +24,6 @@ class App extends React.Component {
     FlashStore.subscribe((state) => {
       this.setState({flash: state});
     });
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   render() {

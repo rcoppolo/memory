@@ -1,18 +1,13 @@
 import React from 'react';
+import Base from './base.jsx';
 import Actions from '../actions';
-import shallowEqual from 'react/lib/shallowEqual';
 import {PAGES, TUTORIAL} from '../constants';
 
-class Tooltip extends React.Component {
+class Tooltip extends Base {
   constructor() {
     super();
     this.close = this.close.bind(this);
-    this.navigate = this.navigate.bind(this);
     this.createAccount = this.createAccount.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   render() {
@@ -85,10 +80,6 @@ class Tooltip extends React.Component {
     if (this.props.tutorialState === TUTORIAL.ready_to_register) {
       Actions.nextTooltip.onNext();
     }
-  }
-
-  navigate(page) {
-    Actions.navigate.onNext(page);
   }
 
   close(e) {

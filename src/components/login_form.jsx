@@ -1,23 +1,14 @@
 import React from 'react';
+import Base from './base.jsx';
 import Actions from '../actions';
-import shallowEqual from 'react/lib/shallowEqual';
 import {Map} from 'immutable';
-import Radium from 'radium'
 
-var styles = {
-};
-
-@Radium
-class LoginForm extends React.Component {
+class LoginForm extends Base {
   constructor({newUser: newUser}) {
     super();
     this.state = {data: Map({newUser: newUser})};
     this.toggleLogin = this.toggleLogin.bind(this);
     this.login = this.login.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   render() {

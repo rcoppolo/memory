@@ -1,17 +1,13 @@
 import React from 'react';
+import Base from './base.jsx';
 import Actions from '../actions';
-import shallowEqual from 'react/lib/shallowEqual';
 import QuestionForm from './question_form.jsx'
 import TopicSelect from './topic_select.jsx';
 
-class Questions extends React.Component {
+class Questions extends Base {
   constructor() {
     super();
     this.save = this.save.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   render() {

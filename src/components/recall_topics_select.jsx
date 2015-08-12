@@ -1,14 +1,13 @@
 import React from 'react';
+import Base from './base.jsx';
 import Actions from '../actions';
-import shallowEqual from 'react/lib/shallowEqual';
 import Loading from './loading.jsx';
 import {PAGES} from '../constants';
 
-class RecallTopicsSelect extends React.Component {
+class RecallTopicsSelect extends Base {
   constructor() {
     super();
     this.state = {all: true};
-    this.navigate = this.navigate.bind(this);
     this.topicChecks = this.topicChecks.bind(this);
     this.toggleRecallTopic = this.toggleRecallTopic.bind(this);
     this.toggleAll = this.toggleAll.bind(this);
@@ -17,10 +16,6 @@ class RecallTopicsSelect extends React.Component {
 
   componentDidMount() {
     Actions.loadTopics.onNext();
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   topicChecks() {
@@ -74,10 +69,6 @@ class RecallTopicsSelect extends React.Component {
 
   toggleRecallTopic(topic) {
     Actions.toggleRecallTopic.onNext(topic);
-  }
-
-  navigate(page) {
-    Actions.navigate.onNext(page);
   }
 
   toggleAll(all) {

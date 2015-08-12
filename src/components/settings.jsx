@@ -1,26 +1,15 @@
 import React from 'react';
+import Base from './base.jsx';
 import Actions from '../actions';
-import shallowEqual from 'react/lib/shallowEqual';
 import {Map} from 'immutable';
 
-var styles = {
-  input: {
-    width: '100%',
-    display: 'block'
-  }
-};
-
-class Settings extends React.Component {
+class Settings extends Base {
   constructor() {
     super();
     this.state = {data: Map({changeEmail: true})};
     this.toggleChange = this.toggleChange.bind(this);
     this.logout = this.logout.bind(this);
     this.update = this.update.bind(this);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
   }
 
   render() {
@@ -56,7 +45,7 @@ class Settings extends React.Component {
       );
     }
     return (
-      <div style={styles.blah}>
+      <div>
         <p>Reactivate the tutorial tooltips.</p>
         <a onClick={this.logout}>Log out</a>
         <ul>
