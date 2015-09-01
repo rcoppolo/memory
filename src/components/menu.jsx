@@ -10,12 +10,16 @@ class Menu extends Base {
 
   render() {
 
-    let loginOrRegister;
-    let settings;
+    let loginOrRegister, loginOrRegisterMobile, settings, settingsMobile;
     if (this.props.currentUser && !this.props.anonUser) {
+      settingsMobile = <li className={this.props.currentPage === PAGES.settings ? 'active' : ''}
+        onClick={this.navigate.bind(this, PAGES.settings)}><span className='gear'>&#9881;</span></li>
       settings = <li className={this.props.currentPage === PAGES.settings ? 'active' : ''}
         onClick={this.navigate.bind(this, PAGES.settings)}>Settings</li>
     } else {
+      loginOrRegisterMobile = <li className={this.props.currentPage === PAGES.login ||
+        this.props.currentPage === PAGES.register ? 'active' : ''}
+        onClick={this.navigate.bind(this, PAGES.login)}><span>&#10144;</span></li>
       loginOrRegister = <li className={this.props.currentPage === PAGES.login ||
         this.props.currentPage === PAGES.register ? 'active' : ''}
         onClick={this.navigate.bind(this, PAGES.login)}>Log in</li>
@@ -23,7 +27,15 @@ class Menu extends Base {
 
     return (
       <div className='menu'>
-        <ul>
+        <ul className='mobile-menu'>
+          <li className={this.props.currentPage === PAGES.questions ? 'active' : ''}
+            onClick={this.navigate.bind(this, PAGES.questions)}><span className='plus'>&#10010;</span></li>
+          <li className={this.props.currentPage === PAGES.recall ? 'active' : ''}
+            onClick={this.navigate.bind(this, PAGES.recall)}><span className='question-mark'>?</span></li>
+          {settingsMobile}
+          {loginOrRegisterMobile}
+        </ul>
+        <ul className='desktop-menu'>
           <li className={this.props.currentPage === PAGES.questions ? 'active' : ''}
             onClick={this.navigate.bind(this, PAGES.questions)}>Create questions</li>
           <li className={this.props.currentPage === PAGES.recall ? 'active' : ''}

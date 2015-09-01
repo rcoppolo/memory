@@ -11,7 +11,7 @@ class Flash extends Base {
   render() {
     if (!this.props.flash.get('message')) { return false; }
     let classes;
-    if (this.props.flash.get('style') === "error") {
+    if (this.props.flash.get('error')) {
       classes = 'flash error';
     } else {
       classes = 'flash';

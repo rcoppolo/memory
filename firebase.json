@@ -1,0 +1,9 @@
+{
+  "firebase": "memory-fish",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

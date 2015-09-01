@@ -47,10 +47,6 @@ class App extends Base {
       );
     }
   }
-
-  click() {
-    Actions.click.onNext();
-  }
 }
 
 React.render(

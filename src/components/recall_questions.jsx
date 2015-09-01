@@ -26,11 +26,15 @@ class RecallQuestions extends Base {
     }
     return (
       <div className='question'>
-        <h1>{question.question}</h1>
-        <p>{this.props.currentQuestionIndex} of {this.props.questions.size} completed</p>
-        <a onClick={this.clearTopics}>Change topics...</a>
-        <span className='button call' onClick={this.done.bind(this, question)} >I know this!</span>
-        <span className='button' onClick={this.requeue}>I'm not sure</span>
+        <h2>{question.question}</h2>
+        <div className='meta'>
+          <span className='progress'>{this.props.currentQuestionIndex} of {this.props.questions.size} completed</span>
+          <a onClick={this.clearTopics}>Change topics...</a>
+        </div>
+        <div className='actions'>
+          <span className='button' onClick={this.requeue}>I'm not sure</span>
+          <span className='button call' onClick={this.done.bind(this, question)} >I know this!</span>
+        </div>
       </div>
     );
   }

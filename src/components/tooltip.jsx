@@ -39,7 +39,7 @@ class Tooltip extends Base {
             <div id={this.props.currentTooltip} className='tooltip tooltip1 tooltip-left'>
               <p>Nice!</p>
               <p>Create as many questions as you like.</p>
-              <p>When you're ready to test your memory, click the "Quiz yourself" link on the left.</p>
+              <p>When you're ready to test your memory, click the "Done, quiz yourself" button.</p>
             </div>
           );
         } else if (this.props.currentPage === PAGES.recall && this.props.currentRecallTopics.size > 0) {
@@ -63,7 +63,7 @@ class Tooltip extends Base {
         tip = (
           <div id={this.props.currentTooltip} className='tooltip tooltip1 tooltip-left'>
             <p>That's pretty much it!</p>
-            <p><a onClick={this.createAccount}>Create an account</a> to save your questions  so you can come back later to quiz again.</p>
+            <p><a onClick={this.createAccount}>Create an account</a> to save your questions so you can come back later to quiz again.</p>
           </div>
         );
         break;

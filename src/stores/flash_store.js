@@ -4,7 +4,7 @@ import {Map} from "immutable";
 
 var state = Map([
   ['message', undefined],
-  ['error', false],
+  ['error', true],
 ]);
 
 var subject = new Rx.BehaviorSubject(state);

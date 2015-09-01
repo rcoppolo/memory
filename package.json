@@ -4,7 +4,8 @@
   "description": "A self-quizzing app built w/ React and RxJS.",
   "main": "src/app.js",
   "scripts": {
-    "watch": "watchify src/app.jsx -t [babelify --optional es7.decorators] --outfile build/bundle.js",
+    "watch": "watchify src/app.jsx -t [babelify --optional es7.decorators] --outfile build/bundle.js ",
+    "styles": "node-sass --watch styles/main.scss -o build/",
     "start": "python -m SimpleHTTPServer 8008",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

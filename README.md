@@ -5,8 +5,8 @@ npm start
 ```
 
 ### Todo
-* Flash messages errors
 * Organize CSS
+* Flash messages errors
 * Validate clicking 'Next' in TopicSelect when no topic is selected
 * Better loading feedback throughout
 * All the settings functionality

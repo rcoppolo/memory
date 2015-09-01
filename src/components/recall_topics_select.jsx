@@ -23,7 +23,7 @@ class RecallTopicsSelect extends Base {
     for (var key in this.props.topics) {
       let topic = this.props.topics[key];
       let checked = this.props.selectedRecallTopics.get(topic);
-      checks.push(<label key={key}><input onChange={this.toggleRecallTopic.bind(this, topic)}
+      checks.push(<label className='button' key={key}><input onChange={this.toggleRecallTopic.bind(this, topic)}
           name='selectedTopic' type='checkbox' checked={checked} />{topic}</label>);
     }
     return checks;

@@ -13,7 +13,7 @@ class Landing extends Base {
       <div className='landing'>
         <h2>Remember more stuff!</h2>
         <div className='text'>
-          <p>Memory Fish is a simple flashcard app that encourages<br />memory-sharpening learning behaviors,* such as:</p>
+          <p>Memory Fish is a simple flashcard app that encourages memory-sharpening learning behaviors* such as:</p>
           <ul>
             <li>Self quizzing</li>
             <li>Interleaving topics</li>

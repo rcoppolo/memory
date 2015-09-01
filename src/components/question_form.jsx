@@ -23,8 +23,10 @@ class QuestionForm extends Base {
           <textarea onKeyDown={this.checkForEnter} disabled={waitingForTopic} ref='form' type='text'
             placeholder={waitingForTopic ? 'Select a topic above...' : 'Tough questions here...'}></textarea>
           <a onClick={this.clearTopic}>Change topic...</a>
-          <input type='submit' className='button call' value='Save this question' />
-          <span className='button' onClick={this.navigate.bind(this, PAGES.recall)}>Done, quiz yourself</span>
+          <div className='actions'>
+            <input type='submit' className='button call' value='Save this question' />
+            <span className='button' onClick={this.navigate.bind(this, PAGES.recall)}>Done, quiz yourself</span>
+          </div>
         </form>
       </div>
     );
@@ -44,6 +46,7 @@ class QuestionForm extends Base {
     e.preventDefault();
     const input = React.findDOMNode(this.refs.form);
     const question = input.value.trim();
+    if (question === '') { return; }
     input.value = '';
     input.focus();
     Actions.saveQuestion.onNext(question);

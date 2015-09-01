@@ -24,7 +24,7 @@ class TopicSelect extends Base {
     for (var key in this.props.topics) {
       let topic = this.props.topics[key];
       let checked = topic === this.props.selectedTopic;
-      radios.push(<label key={key}><input onChange={this.selectTopic.bind(this, topic)}
+      radios.push(<label className='button' key={key}><input onChange={this.selectTopic.bind(this, topic)}
           name='selectedTopic' type='radio' checked={checked} />{topic}</label>);
     }
     return radios;

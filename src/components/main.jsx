@@ -17,7 +17,6 @@ class Main extends Base {
   }
 
   render() {
-    let error = undefined;
     let currentPage;
     switch (this.props.currentPage) {
       case PAGES.register:
@@ -47,23 +46,23 @@ class Main extends Base {
         currentPage = <Landing />
         break;
     }
-    if (this.props.error) { error = <p>{this.props.error}</p>; }
     return (
       <div>
-        <h1 onClick={this.navigate.bind(this, PAGES.landing)}>memory fish</h1>
-        {error}
-        <div className='left'>
+        <div className='relative'>
+          <h1 onClick={this.navigate.bind(this, PAGES.landing)}>memory fish</h1>
           <Menu anonUser={this.props.anonUser}
             currentPage={this.props.currentPage} currentUser={this.props.currentUser} />
           <Flash flash={this.props.flash} />
+          <Tooltip tutorialState={this.props.tutorialState} currentPage={this.props.currentPage}
+                   currentRecallTopics={this.props.currentRecallTopics}
+                   currentTopic={this.props.currentTopic} />
+          <div className='page'>
+            {currentPage}
+          </div>
         </div>
-        <div className='page'>
-          {currentPage}
+        <div className='footer'>
+          <a id='me' target='_blank' href='https://www.coppolo.com'>Ryan made this!</a>
         </div>
-        <Tooltip tutorialState={this.props.tutorialState} currentPage={this.props.currentPage}
-                 currentRecallTopics={this.props.currentRecallTopics}
-                 currentTopic={this.props.currentTopic} />
-        <a id='me' target='_blank' href='https://www.coppolo.com'>Ryan made this!</a>
       </div>
     );
   }
